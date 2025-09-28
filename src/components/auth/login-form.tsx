@@ -1,6 +1,6 @@
 "use client";
 
-import { Cog } from "lucide-react";
+import { Cog, Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,7 +45,7 @@ export function LoginForm() {
           className="w-full h-12 text-base"
         >
           {isLoading ? (
-            "Signing in..."
+            <Loader2Icon className="h-4 w-4 animate-spin" />
           ) : (
             <>
               <svg

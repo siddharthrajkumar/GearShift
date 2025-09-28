@@ -11,6 +11,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useSession } from "@/lib/auth-client";
 
 import data from "./data.json";
+import { Loader2Icon } from "lucide-react";
 
 export default function Page() {
   const { data: session, isPending } = useSession();
@@ -26,7 +27,9 @@ export default function Page() {
   if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-pulse text-lg">Loading...</div>
+        <div className="animate-pulse text-lg">
+          <Loader2Icon className="h-12 w-12 animate-spin" />
+        </div>
       </div>
     );
   }
