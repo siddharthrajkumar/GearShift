@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GearShift
 
-## Getting Started
+A modern web application built with Next.js 15, featuring authentication, database integration, and a beautiful UI.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Authentication**: Complete authentication system with Better Auth
+  - Email/password authentication
+  - Google OAuth2 integration
+  - Session management
+- **Database**: PostgreSQL with Drizzle ORM
+- **UI Components**: shadcn/ui components with Tailwind CSS v4
+- **Form Handling**: React Hook Form with Zod validation
+- **Modern Stack**: Next.js 15 with App Router and Turbopack
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS v4, shadcn/ui
+- **Authentication**: Better Auth with Google OAuth2
+- **Database**: PostgreSQL with Drizzle ORM
+- **Forms**: React Hook Form + Zod validation
+- **Build Tools**: Turbopack, Biome (ESLint + Prettier alternative)
+
+## 📋 Prerequisites
+
+- Node.js 18+
+- pnpm
+- PostgreSQL database
+
+## ⚡ Quick Start
+
+1. **Clone and install dependencies**
+
+   ```bash
+   git clone <your-repo>
+   cd GearShift
+   pnpm install
+   ```
+
+2. **Set up environment variables**
+
+   Copy `.env.local` and update the values:
+
+   ```env
+   DATABASE_URL="postgresql://username:password@localhost:5432/gearshift"
+   GOOGLE_CLIENT_ID="your_google_client_id"
+   GOOGLE_CLIENT_SECRET="your_google_client_secret"
+   BETTER_AUTH_SECRET="your_better_auth_secret_key_here"
+   BETTER_AUTH_URL="http://localhost:3000"
+   ```
+
+3. **Set up the database**
+
+   ```bash
+   # Generate database schema
+   pnpm db:generate
+
+   # Run migrations
+   pnpm db:migrate
+   ```
+
+4. **Start the development server**
+
+   ```bash
+   pnpm dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 🔧 Available Scripts
+
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run Biome linting
+- `pnpm format` - Format code with Biome
+- `pnpm db:generate` - Generate Drizzle schema
+- `pnpm db:migrate` - Run database migrations
+- `pnpm db:studio` - Open Drizzle Studio
+
+## 🎨 Project Structure
+
+```text
+src/
+├── app/                    # Next.js App Router
+│   ├── api/auth/          # Authentication API routes
+│   ├── dashboard/         # Dashboard page
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Homepage
+├── components/
+│   ├── auth/              # Authentication components
+│   └── ui/                # shadcn/ui components
+└── lib/
+    ├── auth.ts            # Better Auth configuration
+    ├── auth-client.ts     # Client-side auth utilities
+    ├── db/                # Database configuration
+    │   ├── index.ts       # Database connection
+    │   └── schema.ts      # Drizzle schema
+    └── utils.ts           # Utility functions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔐 Authentication Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Google OAuth2**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable Google+ API
+   - Create OAuth2 credentials
+   - Add authorized redirect URIs: `http://localhost:3000/api/auth/callback/google`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Better Auth Secret**
+   - Generate a secure random string for `BETTER_AUTH_SECRET`
+   - Use: `openssl rand -base64 32`
 
-## Learn More
+## 🗄️ Database Schema
 
-To learn more about Next.js, take a look at the following resources:
+The application includes:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `users` - User accounts
+- `accounts` - OAuth provider accounts
+- `sessions` - User sessions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Getting Started with Development
 
-## Deploy on Vercel
+1. The homepage features a beautiful login form inspired by Arcana design
+2. Authentication is handled by Better Auth with both email/password and Google OAuth
+3. Forms use React Hook Form with Zod validation
+4. UI components are built with shadcn/ui and Tailwind CSS v4
+5. Database operations use Drizzle ORM with PostgreSQL
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This project uses Biome instead of ESLint/Prettier for faster linting and formatting
+- Tailwind CSS v4 is used for modern styling capabilities
+- Turbopack is enabled for faster development builds
+- The project is configured for TypeScript strict mode
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run `pnpm lint` and `pnpm format`
+5. Submit a pull request
