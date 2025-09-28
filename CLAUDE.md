@@ -96,3 +96,4 @@ BETTER_AUTH_URL="http://localhost:3000"
 - Biome handles both linting and formatting (no ESLint/Prettier)
 - Authentication middleware automatically handles route protection
 - Database migrations managed through Drizzle Kit
+- use react-query for any client side queries and mutation

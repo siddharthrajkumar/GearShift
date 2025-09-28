@@ -1,6 +1,13 @@
 "use client";
 
-import { Cog } from "lucide-react";
+import {
+  Car,
+  Database,
+  Package,
+  ShieldCheck,
+  UserCheck,
+  Users,
+} from "lucide-react";
 import type * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
@@ -15,39 +22,43 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import {
-  CUSTOMERS,
-  DASHBOARD,
-  JOBS,
-  MECHANICS,
-  SETTINGS,
-  SUPERADMIN_CUSTOMERS,
-  SUPERADMIN_DASHBOARD,
-  SUPERADMIN_INVENTORY_ITEMS,
-  SUPERADMIN_USERS,
-  SUPERADMIN_VEHICLES,
-  VEHICLES,
-} from "@/lib/page-definition";
 
-const data = {
+const superAdminNavData = {
   navMain: {
     superadmin: [
-      SUPERADMIN_DASHBOARD,
-      SUPERADMIN_USERS,
-      SUPERADMIN_CUSTOMERS,
-      SUPERADMIN_VEHICLES,
-      SUPERADMIN_INVENTORY_ITEMS,
+      {
+        title: "Dashboard",
+        url: "/superadmin",
+        icon: Database,
+      },
+      {
+        title: "Users",
+        url: "/superadmin/users",
+        icon: Users,
+      },
+      {
+        title: "Customers",
+        url: "/superadmin/customers",
+        icon: UserCheck,
+      },
+      {
+        title: "Vehicles",
+        url: "/superadmin/vehicles",
+        icon: Car,
+      },
+      {
+        title: "Inventory Items",
+        url: "/superadmin/inventory-items",
+        icon: Package,
+      },
     ],
-    admin: [DASHBOARD, JOBS, CUSTOMERS, MECHANICS, VEHICLES, SETTINGS],
-    mechanic: [DASHBOARD, JOBS],
   },
 };
 
-type UserRole = keyof typeof data.navMain;
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function SuperAdminSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = authClient.useSession();
-  const userRole = (session?.user.role as UserRole) ?? "mechanic";
-  const dashboardUrl = userRole === "superadmin" ? "/superadmin" : "/dashboard";
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -58,18 +69,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5 h-auto gap-2"
             >
-              <a href={dashboardUrl}>
-                <div className="aspect-square w-6 h-6 bg-primary rounded-xl text-white  flex items-center justify-center">
-                  <Cog className="h-5 w-5" />
+              <a href="/superadmin">
+                <div className="aspect-square w-6 h-6 bg-red-600 rounded-xl text-white flex items-center justify-center">
+                  <ShieldCheck className="h-5 w-5" />
                 </div>
-                <span className="text-base font-semibold">GearShift</span>
+                <span className="text-base font-semibold">Super Admin</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain userRole={userRole} items={data.navMain} />
+        <NavMain userRole="superadmin" items={superAdminNavData.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser

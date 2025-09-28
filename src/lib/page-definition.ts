@@ -41,3 +41,34 @@ export const MECHANICS = {
   url: "/mechanics",
   icon: UsersIcon,
 };
+
+// Superadmin specific routes
+export const SUPERADMIN_DASHBOARD = {
+  title: "Dashboard",
+  url: "/superadmin",
+  icon: LayoutDashboardIcon,
+};
+
+export const SUPERADMIN_USERS = {
+  title: "Users",
+  url: "/superadmin/users",
+  icon: UsersIcon,
+};
+
+export const SUPERADMIN_CUSTOMERS = {
+  title: "Customers",
+  url: "/superadmin/customers",
+  icon: UsersIcon,
+};
+
+export const SUPERADMIN_VEHICLES = {
+  title: "Vehicles",
+  url: "/superadmin/vehicles",
+  icon: CarIcon,
+};
+
+export const SUPERADMIN_INVENTORY_ITEMS = {
+  title: "Inventory Items",
+  url: "/superadmin/inventory-items",
+  icon: ListIcon,
+};

@@ -3,22 +3,31 @@
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { AppSidebar } from "@/components/app-sidebar";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { DataTable } from "@/components/data-table";
-import { SectionCards } from "@/components/section-cards";
 import { SiteHeader } from "@/components/site-header";
+import { SuperAdminSidebar } from "@/components/superadmin-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useSession } from "@/lib/auth-client";
-import data from "./data.json";
 
-export default function Page() {
+export default function SuperAdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const { data: session, isPending } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/");
+    if (!isPending) {
+      if (!session) {
+        router.push("/");
+        return;
+      }
+
+      // Check if user is superadmin
+      if (session.user.role !== "superadmin") {
+        router.push("/dashboard");
+        return;
+      }
     }
   }, [session, isPending, router]);
 
@@ -33,25 +42,19 @@ export default function Page() {
     );
   }
 
-  // Don't render dashboard if no session (will redirect via useEffect)
-  if (!session) {
+  // Don't render if no session or not superadmin
+  if (!session || session.user.role !== "superadmin") {
     return null;
   }
 
   return (
     <SidebarProvider>
-      <AppSidebar variant="inset" />
+      <SuperAdminSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-              <div className="px-4 lg:px-6">
-                <ChartAreaInteractive />
-              </div>
-              <DataTable data={data} />
-            </div>
+            {children}
           </div>
         </div>
       </SidebarInset>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   SidebarGroup,
@@ -25,7 +26,8 @@ export function NavMain({
   >;
 }) {
   const pathname = usePathname();
-  const isActive = (url: string) => url.startsWith(pathname);
+  const isActive = (url: string) =>
+    pathname === url || (url !== "/" && pathname.startsWith(url));
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -35,9 +37,12 @@ export function NavMain({
               <SidebarMenuButton
                 tooltip={item.title}
                 isActive={isActive(item.url)}
+                asChild
               >
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
+                <Link href={item.url}>
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

@@ -1,11 +1,12 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Define protected routes
-  const protectedRoutes = ["/dashboard"];
+  const protectedRoutes = ["/dashboard", "/superadmin"];
 
   // Check if the current path is a protected route
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -22,9 +23,25 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // If user has session token and trying to access the login page, redirect to dashboard
+  // If user has session token and trying to access the login page, redirect based on role
   if (pathname === "/" && sessionToken) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    try {
+      // Verify session and get user data
+      const session = await auth.api.getSession({
+        headers: {
+          cookie: request.headers.get("cookie") || "",
+        },
+      });
+
+      if (session?.user?.role === "superadmin") {
+        return NextResponse.redirect(new URL("/superadmin", request.url));
+      } else {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
+      }
+    } catch (_error) {
+      // If session verification fails, redirect to dashboard as fallback
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
   }
 
   return NextResponse.next();
