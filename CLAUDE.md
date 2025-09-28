@@ -7,12 +7,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Development server**: `pnpm dev` (uses Turbopack for faster builds)
 - **Build**: `pnpm build` (uses Turbopack)
 - **Production server**: `pnpm start`
-- **Linting and formatting**: `biome check` and `biome format --write`
+- **Linting**: `pnpm lint` or `biome check`
+- **Linting with fixes**: `pnpm lint:fix` or `biome check --write`
+- **Formatting**: `pnpm format` or `biome format --write`
 - **Package manager**: Uses `pnpm` (version 10.15.1+)
 
 ### Database Commands
 
-- **Generate schema**: `pnpm db:push` (push schema changes to database)
+- **Push schema**: `pnpm db:push` (push schema changes to database)
 - **Database studio**: `pnpm db:studio` (open Drizzle Studio for database management)
 
 ## Project Architecture
