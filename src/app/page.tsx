@@ -21,13 +21,12 @@ export default function Home() {
 
           <div className="relative z-10 flex flex-col justify-center items-center p-12 max-w-md mx-auto text-center">
             {/* Logo */}
-            <div className="mb-8">
-              <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <Cog className="h-5 w-5 text-primary-foreground" />
+            <div className="mb-4">
+              <div className="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mb-4">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <Cog className="h-8 w-8 text-primary-foreground" />
                 </div>
               </div>
-              <h2 className="text-sm font-medium text-gray-300">GearShift</h2>
             </div>
 
             {/* Welcome content */}
@@ -55,18 +54,6 @@ export default function Home() {
                 Transform your motorcycle garage with digital tools that
                 eliminate paperwork and streamline your daily workflow.
               </p>
-
-              {/* Avatar group */}
-              <div className="flex items-center space-x-2">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 bg-primary rounded-full border-2 border-gray-800" />
-                  <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-2 border-gray-800" />
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 border-gray-800" />
-                  <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-2 border-gray-800 flex items-center justify-center">
-                    <span className="text-xs text-white font-medium">+</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
