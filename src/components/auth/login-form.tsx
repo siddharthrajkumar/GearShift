@@ -26,9 +26,11 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto dark:text-white">
       <CardHeader className="space-y-1">
-        <div className="flex items-center justify-center mb-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-            <Cog className="h-6 w-6 text-white" />
+        <div className="flex items-center justify-center">
+          <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <Cog className="h-5 w-5 text-primary-foreground" />
+            </div>
           </div>
         </div>
         <CardTitle className="text-2xl font-bold text-center">
