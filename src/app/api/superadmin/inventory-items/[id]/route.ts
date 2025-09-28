@@ -5,12 +5,12 @@ import { inventoryItems } from "@/lib/db/schema";
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await request.json();
     const { sku, name, unit, price, stockQty, isActive } = body;
-    const { id } = params;
+    const { id } = await params;
 
     if (
       !sku ||
@@ -69,10 +69,10 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     const deletedItem = await db
       .delete(inventoryItems)

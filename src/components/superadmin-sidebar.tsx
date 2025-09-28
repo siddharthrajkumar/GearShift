@@ -2,11 +2,16 @@
 
 import {
   Car,
+  Clipboard,
+  CreditCard,
   Database,
+  FileText,
   Package,
   ShieldCheck,
+  ShoppingCart,
   UserCheck,
   Users,
+  Wrench,
 } from "lucide-react";
 import type * as React from "react";
 
@@ -50,6 +55,31 @@ const superAdminNavData = {
         title: "Inventory Items",
         url: "/superadmin/inventory-items",
         icon: Package,
+      },
+      {
+        title: "Jobs",
+        url: "/superadmin/jobs",
+        icon: Clipboard,
+      },
+      {
+        title: "Labour Items",
+        url: "/superadmin/labour-items",
+        icon: Wrench,
+      },
+      {
+        title: "Orders",
+        url: "/superadmin/orders",
+        icon: ShoppingCart,
+      },
+      {
+        title: "Payments",
+        url: "/superadmin/payments",
+        icon: CreditCard,
+      },
+      {
+        title: "Invoices",
+        url: "/superadmin/invoices",
+        icon: FileText,
       },
     ],
   },

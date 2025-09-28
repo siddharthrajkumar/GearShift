@@ -26,8 +26,9 @@ export function NavMain({
   >;
 }) {
   const pathname = usePathname();
-  const isActive = (url: string) =>
-    pathname === url || (url !== "/" && pathname.startsWith(url));
+
+  const isActive = (url: string) => pathname === url;
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">

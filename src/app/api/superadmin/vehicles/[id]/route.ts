@@ -5,12 +5,12 @@ import { customers, vehicles } from "@/lib/db/schema";
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await request.json();
     const { customerId, make, model, year, regNumber, vin } = body;
-    const { id } = params;
+    const { id } = await params;
 
     if (!customerId || !make || !model || !year || !regNumber) {
       return NextResponse.json(
@@ -80,10 +80,10 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     const deletedVehicle = await db
       .delete(vehicles)

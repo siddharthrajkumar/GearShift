@@ -43,6 +43,7 @@ import {
   useUpdateUser,
   useUsers,
 } from "@/lib/hooks/use-users";
+import { toast } from "sonner";
 
 interface User {
   id: string;
@@ -89,6 +90,11 @@ export default function UsersPage() {
         },
       );
     } else {
+      if (!formData.email.endsWith("@gmail.com")) {
+        toast.error("Email must be a google account");
+        return;
+      }
+
       createUser.mutate(formData, {
         onSuccess: () => {
           setDialogOpen(false);
