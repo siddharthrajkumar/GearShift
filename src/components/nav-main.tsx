@@ -1,51 +1,41 @@
-"use client"
+"use client";
 
-import { MailIcon, PlusCircleIcon, type LucideIcon } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
+import type { LucideIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 export function NavMain({
+  userRole,
   items,
 }: {
-  items: {
-    title: string
-    url: string
-    icon?: LucideIcon
-  }[]
+  userRole: string;
+  items: Record<
+    string,
+    {
+      title: string;
+      url: string;
+      icon?: LucideIcon;
+    }[]
+  >;
 }) {
+  const pathname = usePathname();
+  const isActive = (url: string) => url.startsWith(pathname);
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
-            >
-              <PlusCircleIcon />
-              <span>Quick Create</span>
-            </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <MailIcon />
-              <span className="sr-only">Inbox</span>
-            </Button>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <SidebarMenu>
-          {items.map((item) => (
+          {items[userRole]?.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title}>
+              <SidebarMenuButton
+                tooltip={item.title}
+                isActive={isActive(item.url)}
+              >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </SidebarMenuButton>
@@ -54,5 +44,5 @@ export function NavMain({
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }

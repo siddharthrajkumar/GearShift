@@ -20,6 +20,19 @@ export const auth = betterAuth({
     },
   },
   emailAndPassword: {
-    enabled: true,
+    enabled: false,
+  },
+  session: {
+    updateAge: 24 * 60 * 60, // 24 hours
+    expiresIn: 60 * 60 * 24 * 7, // 7 days
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: true,
+        defaultValue: "mechanic",
+      },
+    },
   },
 });
